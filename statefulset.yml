@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: statefulset
+  labels:
+    app: nginx3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx3
+  serviceName: "nginx"
+  template:
+    metadata:
+      labels:
+        app: nginx3
+    spec:
+      containers:
+      - name: nginx3
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        kubernetes.io/hostname: 10.72.206.145
